@@ -51,6 +51,8 @@ See the files under `docs/` for payload/verification details that correspond to 
 
 ## Verification model
 
+![MyZubster Animal Registry flow separating observation, registry record, NFC payload, decoding, provider verification and explicit verification result](assets/visual/MYZ-VIS-014-animal-nfc-verification-flow.svg)
+
 A decoded NFC payload is only evidence supplied to a verifier. Verification requires comparison with the configured registry provider/source of truth.
 
 Do not equate:
