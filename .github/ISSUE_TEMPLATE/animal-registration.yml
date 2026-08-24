@@ -1,14 +1,16 @@
 name: "🐾 Register an Animal (XMR Bounty)"
-description: "Register a new animal on the MyZubster Animal Registry"
-title: "[ANIMAL] Species Name - Location"
+description: "Register a new animal without publishing precise location or payment data"
+title: "[ANIMAL] Species Name - Country/Region"
 labels: ["🐾 animal-registration"]
 body:
   - type: markdown
     attributes:
       value: |
         ## 🐾 Register an Animal on MyZubster
-        **Reward:** 0.001 XMR (≈ €0.20) for each verified animal registration.
-        ⚠️ **Payment Policy:** This bounty pays in Monero (XMR) ONLY.
+
+        **Reward:** 0.001 XMR for each verified registration, subject to the current bounty policy.
+
+        This issue is public. Do not include exact coordinates, a home address, an animal owner's address, a wildlife nesting/den location, or a Monero wallet address. Remove GPS/EXIF metadata from photos before uploading them. Payment details are requested privately only after verification.
 
   - type: dropdown
     id: animal_type
@@ -40,18 +42,29 @@ body:
       required: true
 
   - type: input
-    id: latitude
+    id: country
     attributes:
-      label: "📍 Latitude"
-      placeholder: "41.9028"
+      label: "🌍 Country"
+      description: "Country only; this value will be public."
+      placeholder: "Italy"
     validations:
       required: true
 
   - type: input
-    id: longitude
+    id: region
     attributes:
-      label: "📍 Longitude"
-      placeholder: "12.4964"
+      label: "🗺️ Region or broad area"
+      description: "Optional. Do not enter a street, exact coordinates, or a sensitive habitat."
+      placeholder: "Emilia-Romagna"
+
+  - type: dropdown
+    id: location_visibility
+    attributes:
+      label: "🔒 Location visibility for the registry"
+      description: "Private is required for pets at home, endangered species, nests, dens, and other sensitive observations."
+      options:
+        - "Private — country only (recommended)"
+        - "Approximate — broad region only"
     validations:
       required: true
 
@@ -71,26 +84,26 @@ body:
     id: description
     attributes:
       label: "📝 Description"
-      placeholder: "Describe the animal, its behavior, habitat, etc."
+      placeholder: "Describe the animal, its behavior and non-sensitive habitat information."
 
   - type: textarea
     id: photos
     attributes:
       label: "📸 Photos"
+      description: "Remove GPS/EXIF metadata and identifying home details before sharing."
       placeholder: "https://imgur.com/..."
 
-  - type: input
-    id: xmr_address
+  - type: checkboxes
+    id: privacy_confirmation
     attributes:
-      label: "💰 Monero (XMR) Address"
-      placeholder: "4A2M4vB..."
-    validations:
-      required: true
+      label: "🔐 Privacy confirmation"
+      options:
+        - label: "I removed exact location, home/address details, wallet addresses, and photo GPS/EXIF metadata from this public issue."
+          required: true
 
   - type: markdown
     attributes:
       value: |
-        ### 🔒 Privacy Notice
-        - Your Monero address will only be used for payment
-        - No personal data required
-        - All records are public on the Monero blockchain
+        ### Payment privacy
+
+        Never post a Monero address in this issue. If the registration is approved for a bounty, maintainers will request payment details through a private, verified channel.
